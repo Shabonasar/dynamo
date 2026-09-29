@@ -93,9 +93,10 @@ For an inter-pod GPU Memory Service (GMS) deployment, the operator sets `DYNAMO_
 engine role instead of the PCSG-wide pod index because the scaling group also contains weight-server
 cliques.
 
-The operator owns these variables and replaces values with the same names from the component's
-`podTemplate`. Use the aliases instead of provider-specific `GROVE_*` or `LWS_*` variables when a
-custom command needs the component topology.
+The operator places these variables before the environment variables from the component's
+`podTemplate`. User variables can therefore reference the aliases, and a later user variable with
+the same name overrides the injected value. Use the aliases instead of provider-specific `GROVE_*`
+or `LWS_*` variables when a custom command needs the component topology.
 
 Kubernetes expands `$(NAME)` references in a container's `command` and `args`. A shell process that
 runs inside the container reads the same environment variables with `$NAME` or `${NAME}`. For
